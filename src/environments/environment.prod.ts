@@ -3,13 +3,13 @@ export const environment = {
 
   firebase: {
 
-    apiKey: "AIzaSyDk__LH3vy-vzq5XjuGBk4dieqItkrWKJ0",
-    authDomain: "oshop-9a691.firebaseapp.com",
-    databaseURL: "https://oshop-9a691.firebaseio.com",
-    projectId: "oshop-9a691",
-    storageBucket: "oshop-9a691.appspot.com",
-    messagingSenderId: "966360287650",
-    appId: "1:966360287650:web:56a30c2573d6fc250e4afb"
+    apiKey: "AIzaSyB9Bck8EeXLp8oXcs0gXlkiKUk8aa2_vK8",
+  authDomain: "organicshop-3e088.firebaseapp.com",
+  databaseURL: "https://organicshop-3e088.firebaseio.com",
+  projectId: "organicshop-3e088",
+  storageBucket: "organicshop-3e088.appspot.com",
+  messagingSenderId: "586570683994",
+  appId: "1:586570683994:web:e6b8ab173ac453306b2a63",
+  measurementId: "G-B5J9WS4HHT"
   }
 };
-pp
