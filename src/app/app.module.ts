@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth-guard.service';
 import { RouterModule } from '@angular/router';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
@@ -42,30 +43,24 @@ import { AuthService } from './auth.service';
     AngularFireAuthModule,
     NgbModule,
     RouterModule.forRoot([
+
+      
+      { path: 'login', component: LoginComponent },
       { path: '', component: HomeComponent },
-
       { path: 'products', component: ProductsComponent },
-
-
-
       { path: 'shopping-cart', component: ShoppingCartComponent },
 
-      { path: 'check-out', component: CheckOutComponent },
+      { path: 'check-out', component: CheckOutComponent , canActivate:[AuthGuard]},
+      { path: 'order-success', component: OrderSuccessComponent, canActivate:[AuthGuard] },
+      { path: 'my/orders', component: MyOrdersComponent,canActivate:[AuthGuard] },
 
-      { path: 'order-success', component: OrderSuccessComponent },
 
-
-      { path: 'my/orders', component: MyOrdersComponent },
-
-      { path: 'login', component: LoginComponent },
-
-      { path: 'admin/products', component: AdminProductsComponent },
-
-      { path: 'admin/orders', component: AdminOrdersComponent },
+      { path: 'admin/products', component: AdminProductsComponent,canActivate:[AuthGuard] },
+      { path: 'admin/orders', component: AdminOrdersComponent ,canActivate:[AuthGuard]},
 
     ])
   ],
-  providers: [AuthService],
+  providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
