@@ -1,31 +1,31 @@
-<form>
+<form #f="ngForm" (ngSubmit)="save(f.value)">
   <div class="form-goup mb-3">
     <label for="title">Title</label>
-    <input id="title" type="text" class="form-control">
+    <input ngModel name="title" id="title" type="text" class="form-control">
   </div>
 
   <div class="form-goup mb-3">
     <label for="price">Price</label>
-   
+
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">$</span>
       </div>
-      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+      <input ngModel name="price" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
       <div class="input-group-append">
         <span class="input-group-text">.00</span>
       </div>
     </div>
   </div>
 
- 
+
 
   <div class="form-goup mb-3">
     <label for="category">Category</label>
-    <select id="category" class="form-control">
+    <select ngModel name="category" id="category" class="form-control">
       <option value=""></option>
-      <option *ngFor="let c of categories$ | async" [value]="c.$key">
-        {{c.name}}
+      <option *ngFor="let c of categories$ | async" [value]="c.key">
+        {{c.payload.val().name}}
       </option>
     </select>
   </div>
@@ -33,7 +33,7 @@
 
   <div class="form-goup mb-3">
     <label for="imageUrl">Image Url</label>
-    <input id="imageUrl" type="text" class="form-control">
+    <input ngModel name="imageUrl" id="imageUrl" type="text" class="form-control">
   </div>
 
   <button class="btn btn-primary mb-3">Save</button>
