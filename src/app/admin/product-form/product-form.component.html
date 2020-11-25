@@ -1,7 +1,9 @@
 <form #f="ngForm" (ngSubmit)="save(f.value)">
   <div class="form-goup mb-3">
     <label for="title">Title</label>
-    <input ngModel name="title" id="title" type="text" class="form-control">
+    <input #title="ngModel" ngModel name="title" id="title" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="title.touched && title.invalid"> Title is required</div>
+
   </div>
 
   <div class="form-goup mb-3">
@@ -11,29 +13,39 @@
       <div class="input-group-prepend">
         <span class="input-group-text">$</span>
       </div>
-      <input ngModel name="price" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+      <input #price="ngModel" ngModel name="price" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" required>
+
       <div class="input-group-append">
         <span class="input-group-text">.00</span>
       </div>
+
     </div>
+    <div class="alert alert-danger" *ngIf="price.touched && price.invalid"> Price is required</div>
+
+
   </div>
 
 
 
   <div class="form-goup mb-3">
     <label for="category">Category</label>
-    <select ngModel name="category" id="category" class="form-control">
+    <select #category="ngModel" ngModel name="category" id="category" class="form-control" required>
       <option value=""></option>
       <option *ngFor="let c of categories$ | async" [value]="c.key">
         {{c.payload.val().name}}
       </option>
-    </select>
+    </select>   
+     <div class="alert alert-danger" *ngIf="category.touched && category.invalid"> Category is required</div>
+
+
   </div>
 
 
   <div class="form-goup mb-3">
     <label for="imageUrl">Image Url</label>
-    <input ngModel name="imageUrl" id="imageUrl" type="text" class="form-control">
+    <input #imageUrl="ngModel" ngModel name="imageUrl" id="imageUrl" type="text" class="form-control" required>
+    <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid"> Image is required</div>
+
   </div>
 
   <button class="btn btn-primary mb-3">Save</button>
