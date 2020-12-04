@@ -22,6 +22,12 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './category.service';
+import { FormsModule } from '@angular/forms';
+import { ProductService } from './product.service';
+import { CustomFormsModule } from 'ng2-validation';
+import {DataTablesModule} from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -35,7 +41,8 @@ import { AuthService } from './auth.service';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +51,9 @@ import { AuthService } from './auth.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
+    FormsModule,
+    CustomFormsModule,
+    DataTablesModule,
     RouterModule.forRoot([
 
 
@@ -57,20 +67,40 @@ import { AuthService } from './auth.service';
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
 
 
-      { path: 'admin/products',
-       component: AdminProductsComponent, 
-       canActivate: [AuthGuard,AdminAuthGuard] },
 
-      { path: 'admin/orders', 
-      component: AdminOrdersComponent, 
-      canActivate: [AuthGuard, AdminAuthGuard] },
+
+      {
+        path: 'admin/products/new',
+        component: ProductFormComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+
+      {
+        path: 'admin/products/:id',
+        component: ProductFormComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+
+      {
+        path: 'admin/products',
+        component: AdminProductsComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
+
+
+      {
+        path: 'admin/orders',
+        component: AdminOrdersComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+      },
 
     ])
   ],
   providers: [AuthService,
     AuthGuard,
     AdminAuthGuard,
-    UserService],
+    UserService,
+    CategoryService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
