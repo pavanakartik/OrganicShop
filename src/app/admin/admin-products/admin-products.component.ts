@@ -2,7 +2,8 @@
 import { Product } from './../../models/product';
 import { ProductService } from './../../product.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import{Subscription} from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -12,28 +13,51 @@ import{Subscription} from 'rxjs';
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
-  products: Product [];
-  filteredProducts: any [];
-subscription:  Subscription;
+  dtOptions: DataTables.Settings = {};
+
+  products: Product[] = [];
+  filteredProducts: Product[]= [];
+
+  dtTrigger: Subject<any> = new Subject<any>();
+
+
+  subscription: Subscription;
 
   constructor(private productService: ProductService) {
 
-    this.subscription = productService.getAll<Product>().subscribe( p => this.filteredProducts = this.products = p)  }
+
+
+
+  }
+
+
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    
+    this.dtTrigger.unsubscribe();
   }
 
 
 
   ngOnInit(): void {
+
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 3
+    };
+
+    this.productService.getAll<Product>().subscribe(p => {
+      this.filteredProducts  = p;
+      this.dtTrigger.next();
+    })
+
   }
 
-  filter(query:string){
+  filter(query: string) {
     console.log(query);
-    this.filteredProducts=(query)?
-    this.products.filter(p=>p.title.toLowerCase().includes(query.toLowerCase()))
-    : this.products;
+    this.filteredProducts = (query) ?
+      this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase()))
+      : this.products;
   }
 
-  
+
 }
