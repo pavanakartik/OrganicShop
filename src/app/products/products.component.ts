@@ -1,23 +1,46 @@
+import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from './../category.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent  {
+export class ProductsComponent {
 
 
-  products$;
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
   categories$;
-  constructor(productService: ProductService, categorService: CategoryService) { 
+  category: string;
+  constructor(
+    route: ActivatedRoute,
+    productService: ProductService,
+    categorService: CategoryService) {
 
-    this.products$= productService.getAll();
-    this.categories$= categorService.getAll();
+    productService.getAll<Product>().subscribe(products => {
+      this.products = products;
+
+      route.queryParamMap.subscribe(params => {
+        this.category = params.get('category');
+
+        this.filteredProducts = (this.category) ?
+          this.products.filter(p => p.category == this.category) :
+          this.products;
+
+      });
+
+
+    });
+
+    this.categories$ = categorService.getAll();
+
+
   }
 
- 
+
 
 }
