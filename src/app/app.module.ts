@@ -56,9 +56,9 @@ import {DataTablesModule} from 'angular-datatables';
     DataTablesModule,
     RouterModule.forRoot([
 
-
+      { path: '', component: ProductsComponent},
       { path: 'login', component: LoginComponent },
-      { path: '', component: HomeComponent },
+    
       { path: 'products', component: ProductsComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
 
