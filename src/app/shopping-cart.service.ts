@@ -13,24 +13,33 @@ export class ShoppingCartService {
 
   async addToCart(product: Product) {                    //here we add the cart to firebase
 
+
+    this.updateItemQuantity(product, 1);
+
+
+  }
+
+
+  async removeFromCart(product: Product) {
+
+    this.updateItemQuantity(product, -1);
+
+
+
+  }
+
+  private async updateItemQuantity(product: Product, change: number) {
+
     let cartId = await this.getOrCreateCartId();
 
     let item$ = await this.getItem(cartId, product.key);
 
 
     item$.snapshotChanges().pipe(take(1)).subscribe((item: any) => {
-      if (item.payload.val())
-        item$.update({ product: product, quantity: item.payload.val().quantity + 1 })
-      else
-        item$.update({ product: product, quantity: 1 })
-    })
 
-
+      item$.update({ product: product, quantity: item.payload.val().quantity + change })
+    });
   }
-
-
-
-
 
   private create() {
 
