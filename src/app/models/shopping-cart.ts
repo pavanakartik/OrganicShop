@@ -1,3 +1,4 @@
+import { Product } from 'OrganicShop/src/app/models/product';
 import { typeWithParameters } from '@angular/compiler/src/render3/util';
 import { ShoppingCartItem } from './shopping-cart-item';
 
@@ -35,4 +36,13 @@ export class ShoppingCart {
 
         return sum;
     }
+
+    getQuantity(product: Product) {
+
+       
+    
+        let item = this.itemsMap[product.key];
+    
+        return item ? item.quantity : 0;
+      }
 }
