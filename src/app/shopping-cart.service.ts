@@ -1,5 +1,5 @@
 import { ShoppingCartItem } from './models/shopping-cart-item';
-import { ShoppingCartComponent } from './../../OrganicShop/src/app/shopping-cart/shopping-cart.component';
+
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 
