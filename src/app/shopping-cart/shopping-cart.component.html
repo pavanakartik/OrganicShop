@@ -3,7 +3,6 @@
     <p>
         You have {{ cart.totalItemsCount }} items in your shopping cart.
 
-
         <button *ngIf="cart.items.length" (click)="clearCart()" class="btn btn-light btn-sm">Clear Shopping
             Cart</button>
 
@@ -46,6 +45,10 @@
     </table>
 
 
+    <a *ngIf="cart.items.length" routerLink="/check-out" class="btn btn-primary">Check Out</a>
+
+
     <a routerLink="/check-out" *ngIf="cart.items.length" class="btn btn-primary">Check Out</a>
+
 
 </div>
