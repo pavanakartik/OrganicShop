@@ -1,6 +1,6 @@
 import { ShoppingCartItem } from './models/shopping-cart-item'
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
-import { AngularFireDatabase } from '@angular/fire/database';
+
 
 import { Injectable } from '@angular/core';
 
