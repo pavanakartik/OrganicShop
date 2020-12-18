@@ -44,5 +44,11 @@
         </tfoot>
     </table>
 
+
     <a *ngIf="cart.items.length" routerLink="/check-out" class="btn btn-primary">Check Out</a>
+
+
+    <a routerLink="/check-out" *ngIf="cart.items.length" class="btn btn-primary">Check Out</a>
+
+
 </div>

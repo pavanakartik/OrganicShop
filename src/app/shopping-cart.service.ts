@@ -1,6 +1,7 @@
-import { ShoppingCartItem } from './models/shopping-cart-item';
-
+import { ShoppingCartItem } from './models/shopping-cart-item'
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
+
 import { Injectable } from '@angular/core';
 
 import { take, map } from 'rxjs/operators';
@@ -101,11 +102,11 @@ export class ShoppingCartService {
     console.log(item$);
 
     item$.snapshotChanges().pipe(take(1)).subscribe((item?: any) => {
-     
-     
+
+
       let quantity = change;
-      
-      
+
+
       if (item.payload.exists()) {
         quantity = item.payload.val().quantity + change;
       }
